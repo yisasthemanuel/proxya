@@ -1,0 +1,25 @@
+logging:
+  file:
+    name: api.seta.log
+    path: .
+  level:
+    org:
+      jlobato:
+        seta: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        exclude: shutdown
+        include: '*'
+redmine:
+  apiAccessKey: 5163fe4279c2aa388d63b4e215e12325ec9c3f79
+  projectKey: testing-project-onteniente
+  uri: http://localhost:3000/onteniente
+server:
+  port: 8088
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Imputaciones view">
+    <meta name="author" content="Yisas">
+
+    <title>Imputaciones</title>
+
+  </head>
+  <body>
+  <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/gesproy}">
+  	<input type="hidden" name="targetRedMine" id="targetRedMine" value="3"/>
+  	<div>
+		<label for="fichImputaciones">Imputaciones</label>
+		<div>
+			<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
+		</div>
+	</div>
+	<div>
+		<label for="singlebutton">Imputar</label>
+		<div>
+			<button id="singlebutton" name="singlebutton" th:formaction="@{/gesproy/cargaImputaciones}">Imputar</button>
+		</div>
+	</div>
+	<div>
+		<span th:text="${validaciones}">
+		</span>
+	</div>
+	
+  </form>
+  </body>
+</html>

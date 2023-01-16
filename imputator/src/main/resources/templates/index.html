@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Imputaciones view">
+    <meta name="author" content="Yisas">
+
+    <title>Imputaciones</title>
+
+  </head>
+  <body>
+  <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/imputaciones}">
+  	<div>
+	  <table>
+	  	<tr>
+	  		<td>
+	  			<label for="targetRedMine">RedMine destino: </label> 
+	  			<select name="targetRedMine" id="targetRedMine">
+	  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
+	  				<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
+	    			</option>
+				</select>
+	  		</td>
+	  	</tr>
+	  </table>
+	 </div>
+	  <br>
+	  <div>
+	  <table>
+	  	<tr>
+	  		<th>Propiedad</th>
+	  		<th>Valor</th>
+	  	</tr>
+	  	<tr th:each="propiedad : ${imputacionesProperties}">
+	  		<td th:text="${propiedad.key}">seta.uriSETA</td>
+	  		<td th:text="${propiedad.value}">http://seta.cciu.junta-andalucia.es/</td>
+	  	</tr>
+	  </table>
+	  </div>
+	  <br>
+	  <br>
+	  <div>
+		  <label for="fichImputaciones">Imputaciones</label>
+		  <div>
+		  	<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
+		  </div>
+	  </div>
+	  <div>
+	  	<label for="singlebutton">Imputar</label>
+		<div>
+			<button id="singlebutton" name="singlebutton" th:formaction="@{/imputaciones/nuevaCarga}">Imputar</button>
+		</div>
+	  </div>
+	  <div>
+	  	<span th:text="${testDone}">
+	  		Testeando
+	  	</span>
+	  </div>
+	  <div>
+	  	<a id="restorebutton" name="restorebutton" th:href="@{/imputaciones/restore}">Restaurar</button>
+	  </div>
+  </form>
+  </body>
+</html>

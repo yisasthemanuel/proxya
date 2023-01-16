@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Imputaciones view">
+    <meta name="author" content="Yisas">
+
+  <title>Restaurar</title>
+
+  </head>
+  <body>
+  <form class="formulario" method="post">
+	  <div>
+	  		<table>
+	  			<tr>
+	  				<th>ID</th>
+	  				<th>Fecha</th>
+	  				<th>Redmine</th>
+	  			</tr>
+	  			<tr th:each="carga : ${cargasDisponibles}">
+	  				<td><a th:href="@{/imputaciones/restore(id=${carga.id})}" th:text="${carga.id}">1599937697785</a></td>
+	  				<td th:text="${#dates.format(carga.fechaEjecucion, 'dd/MM/yyyy HH:mm:SS')}">12/09/2020</td>
+	  				<td th:text="${carga.destino.description}">SETA</td>
+	  			</tr>
+	  		</table>
+	  </div>
+	  <div>
+	  	<a id="imputacionesbutton" name="imputacionesbutton" th:href="@{/imputaciones/index}" th:text="Imputaciones">Imputaciones</button>
+	  </div>
+  </form>
+  </body>  
+</html>

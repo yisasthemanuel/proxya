@@ -1,0 +1,19 @@
+El almacén de certificados que utiliza la aplicacion para el https está en src/main/resources. Cuando cambian el certificado de https de SETA (normalmente en noviembre) hay que incluirlo en dicho almacén. Para eso
+
+Incluir en el cacerts de src/main/resources el certificado de SETA:
+
+
+# Descargar el certificado https desde el navegdor.
+1. Con la vpn de Catalana activa, poner la url https://seta.ceceu.junta-andalucia.es/
+2. Pinchar en el candado que sale a la izquierda de la URL y pinchar en "conexión segura"
+3. Exportar el certificado y guardarlo en el directorio raíz del proyecto.
+
+# Importar el certificado
+keytool -importcert -alias <alias> -file <fichero .cer> -keystore cacerts -storepass changeit -noprompt
+ejemplo: keytool -importcert -alias seta_2022_11 -file seta.2022.10.cer -keystore cacerts -storepass changeit -noprompt
+
+# Comprobar que está el certificado
+keytool -list -v -alias <alias> -storepass changeit
+ejemplo: keytool -list -v -alias seta_2022_11 -storepass changeit
+
+Si no se hace directamente sobre el cacerts de src/main/resources, copiarlo a dicho directorio

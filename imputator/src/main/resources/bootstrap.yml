@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: '@project.artifactId@'
+  cloud:
+    config:
+      enabled: ${CONFIG_ENABLED:true}
+      fail-fast: ${CONFIG_FAIL_FAST:false}
+      label: ${CONFIG_SERVER_LABEL:master}
+      password: ${CONFIG_SERVER_PASSWORD:s3cr3t}
+      profile: ${SPRING_PROFILES_ACTIVE:development}
+      uri: ${CONFIG_SERVER:http://localhost:8888}
+      username: ${CONFIG_SERVER_USER:root}
