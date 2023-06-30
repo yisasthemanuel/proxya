@@ -4,6 +4,7 @@ import org.jlobato.imputaciones.config.RedMineConfiguracion;
 import org.jlobato.imputaciones.model.Persona;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
 import org.jlobato.imputaciones.service.ImputacionService;
+import org.jlobato.imputaciones.service.RedMineService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,44 +46,37 @@ public class ImputacionesApplication {
 //	@Bean
 //	public CommandLineRunner initRelacion(ImputacionService service, RedMineService tagetRedMine) {
 //		return args -> {
-//			Integer source = 147416;
+//			Integer source = 158880;
 //			
 //			Integer[] targets = {
-//					122270	,
-//					133553	,
-//					134438	,
-//					141068	,
-//					141150	,
-//					142343	,
-//					142464	,
-//					142674	,
-//					143490	,
-//					143557	,
-//					143592	,
-//					144062	,
-//					144292	,
-//					144301	,
-//					144511	,
-//					144553	,
-//					144642	,
-//					144710	,
-//					144724	,
-//					144867	,
-//					144891	,
-//					144892	,
-//					144910	,
-//					144911	,
-//					145375	,
-//					145379	,
-//					145400	,
-//					145426	,
-//					145570	,
-//					145636	,
-//					145640	,
-//					145650	,
-//					145856	,
-//					146113	,
-//					146521	
+//					125922	,
+//					125923	,
+//					125924	,
+//					125926	,
+//					140992	,
+//					143160	,
+//					143161	,
+//					143167	,
+//					151823	,
+//					151924	,
+//					151926	,
+//					153167	,
+//					155893	,
+//					156070	,
+//					156086	,
+//					156502	,
+//					156513	,
+//					156519	,
+//					156587	,
+//					156592	,
+//					156722	,
+//					157382	,
+//					157452	,
+//					157479	,
+//					157886	,
+//					158067	,
+//					158168	,
+//					158341	
 //			};
 //			
 //			for (int i = 0; i < targets.length; i++) {
@@ -96,7 +90,7 @@ public class ImputacionesApplication {
 //			
 //		};
 //	}
-//	
+	
 //	@Bean
 //	public CommandLineRunner initImputacion(ImputacionService service, RedMineTargetService targetRedMineService, SimpleDateFormat formateadorFechaImputaciones) {
 //		return args -> {

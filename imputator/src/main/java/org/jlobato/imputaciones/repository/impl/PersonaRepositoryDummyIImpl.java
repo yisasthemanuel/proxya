@@ -456,7 +456,72 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 				.nombreCompleto("Jose Martín López Blanco")
 				.build()
 		);
-		
+		//Francisco José Morente Bonilla
+		PERSONAS.put("fjmb07", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("c8d4290ebc88c381bcd27de03657a54a811e51d0")
+				.nickname("fjmb07")
+				.nombre("Francisco José")
+				.primerApellido("Morente")
+				.segundoApellido("Bonilla")
+				.nombreCompleto("Francisco José Morente Bonilla")
+				.build()
+		);
+		//Antonio Librero Pajuelo
+		PERSONAS.put("aalp69", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("a82de626981a5dcbfe7ce3fa6a19ff5b110931d4")
+				.nickname("aalp69")
+				.nombre("Antonio")
+				.primerApellido("Librero")
+				.segundoApellido("Pajuelo")
+				.nombreCompleto("Antonio Librero Pajuelo")
+				.build()
+		);
+		//Víctor Canseco Magro
+		PERSONAS.put("vvcm39", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("ffdec7015f7d298899b11005585849e44f1581cf")
+				.nickname("vvcm39")
+				.nombre("Víctor")
+				.primerApellido("Canseco")
+				.segundoApellido("Magro")
+				.nombreCompleto("Víctor Canseco Magro")
+				.build()
+		);
+		//Jesús Rivero Capellán
+		PERSONAS.put("jjrc163", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("b0a5887c062e786256edb51ee8c1896ce1ba696f")
+				.nickname("jjrc163")
+				.nombre("Jesús")
+				.primerApellido("Rivero")
+				.segundoApellido("Capellán")
+				.nombreCompleto("Jesús Rivero Capellán")
+				.build()
+		);
+		//Manuel Sánchez Torres
+		PERSONAS.put("mmst55", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("5062d0d989ee819f2c77fb39568245d1d8bc0135")
+				.nickname("mmst55")
+				.nombre("Manuel")
+				.primerApellido("Sánchez")
+				.segundoApellido("Torres")
+				.nombreCompleto("Manuel Sánchez Torres")
+				.build()
+		);
+		//Ángeles Gómez Ramírez
+		PERSONAS.put("aagr187", PersonaImpl.builder()
+				.id(String.valueOf(id++))
+				.apiKey("999f84ea81d784856b191a86363a6d4edd3f9d6f")
+				.nickname("aagr187")
+				.nombre("Ángeles")
+				.primerApellido("Gómez")
+				.segundoApellido("Ramírez")
+				.nombreCompleto("Ángeles Gómez Ramírez")
+				.build()
+		);
 		
 		//A partir de aquí son usuarios para hacer pruebas
 		//Admin (for testing purposes)
@@ -493,7 +558,11 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 
 	@Override
 	public Persona getPersona(String nickname) {
-		return PERSONAS.get(nickname);
+		String idPersona = nickname;
+		if (nickname != null) {
+			idPersona = nickname.trim();
+		}
+		return PERSONAS.get(idPersona);
 	}
 
 	@Override
