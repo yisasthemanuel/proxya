@@ -426,7 +426,7 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 		//Jose Luis Guerra Díaz
 		PERSONAS.put("jlgd11", PersonaImpl.builder()
 				.id(String.valueOf(id++))
-				.apiKey("8992c36adfb16a30264089abe809a9d7374a5196s")
+				.apiKey("8992c36adfb16a30264089abe809a9d7374a5196")
 				.nickname("jlgd11")
 				.nombre("Jose Luis")
 				.primerApellido("Guerra")
