@@ -24,6 +24,29 @@
 			<button id="singlebutton" name="singlebutton" th:formaction="@{/gesproy/cargaImputaciones}">Imputar</button>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+  	<div>
+		<label for="huMantenimiento">Petición a donde incluir las relaciones</label>
+		<div>
+			<input id="huMantenimiento" name="huMantenimiento" type="text" placeholder="#HU de mantenimiento">
+		</div>
+	</div>
+  	<div>
+		<label for="peticionesRelacionadas">Peticiones que se relacionan con la anterior</label>
+		<div>
+			<textarea id="peticionesRelacionadas" name="peticionesRelacionadas" placeholder="Lista de peticiones separadas por comas"
+				rows="40" cols="30">
+			</textarea>
+		</div>
+	</div>
+	<div>
+		<label for="relbutton">Relacionar peticiones</label>
+		<div>
+			<button id="relbutton" name="relbutton" th:formaction="@{/gesproy/relacionaPeticiones}">Relaciona peticiones</button>
+		</div>
+	</div>
 	<div>
 		<span th:text="${validaciones}">
 		</span>

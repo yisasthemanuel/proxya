@@ -4,7 +4,6 @@ import org.jlobato.imputaciones.config.RedMineConfiguracion;
 import org.jlobato.imputaciones.model.Persona;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
 import org.jlobato.imputaciones.service.ImputacionService;
-import org.jlobato.imputaciones.service.RedMineService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -46,37 +45,75 @@ public class ImputacionesApplication {
 //	@Bean
 //	public CommandLineRunner initRelacion(ImputacionService service, RedMineService tagetRedMine) {
 //		return args -> {
-//			Integer source = 158880;
+//			Integer source = 164731;
 //			
 //			Integer[] targets = {
-//					125922	,
-//					125923	,
-//					125924	,
-//					125926	,
-//					140992	,
-//					143160	,
+//					131753	,
+//					141090	,
+//					143159	,
 //					143161	,
-//					143167	,
-//					151823	,
+//					145629	,
+//					147450	,
+//					147458	,
+//					150382	,
+//					150384	,
+//					150389	,
+//					151160	,
+//					151161	,
+//					151165	,
+//					151167	,
+//					151923	,
 //					151924	,
-//					151926	,
+//					151925	,
+//					152490	,
+//					152800	,
 //					153167	,
+//					153977	,
+//					155049	,
+//					155247	,
+//					155476	,
 //					155893	,
 //					156070	,
 //					156086	,
-//					156502	,
-//					156513	,
 //					156519	,
-//					156587	,
-//					156592	,
-//					156722	,
-//					157382	,
-//					157452	,
-//					157479	,
+//					157242	,
+//					157244	,
+//					157515	,
+//					157628	,
 //					157886	,
+//					157897	,
+//					157899	,
+//					157901	,
 //					158067	,
+//					158094	,
+//					158132	,
 //					158168	,
-//					158341	
+//					158449	,
+//					158617	,
+//					158736	,
+//					158738	,
+//					158739	,
+//					158755	,
+//					158840	,
+//					158914	,
+//					158920	,
+//					159018	,
+//					159062	,
+//					159140	,
+//					159196	,
+//					159205	,
+//					159336	,
+//					159357	,
+//					159358	,
+//					159359	,
+//					159377	,
+//					159380	,
+//					159385	,
+//					159479	,
+//					159511	,
+//					159606	,
+//					159608	,
+//					160021	
 //			};
 //			
 //			for (int i = 0; i < targets.length; i++) {

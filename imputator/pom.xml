@@ -131,6 +131,7 @@
 				<filtering>true</filtering>
 				<excludes>
 					<exclude>cacerts</exclude>
+					<exclude>personas.ser</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -138,6 +139,7 @@
 				<filtering>false</filtering>
 				<includes>
 					<include>cacerts</include>
+					<include>personas.ser</include>
 				</includes>
 			</resource>
 		</resources>

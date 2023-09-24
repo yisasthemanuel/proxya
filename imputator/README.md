@@ -3,10 +3,20 @@
 Servicio para la imputación de horas en Gesproy desde una hoja excel. Depende de un servicio de cloud config que es de donde lee la configuración para conectarse a Gesproy.
 Por defecto se ejecuta en el puerto 8088
 
-1. Una vez arrancado poner ir a la URL http://localhost:8088/gesproy/indexindv
+1. Una vez arrancado ir a la URL http://localhost:8088/gesproy/indexindv
 2. Pinchar en Seleccionar archivo y elegir la hoja de cálculo con la hoja IMPUTACIONES en el formato adecuado. En la hoja src/test/resources/imputacion.modelo.xlsx hay un ejemplo
 3. Pichar en el botón imputar
 4. Mirar en el log
+
+# RELACIONATOR GESPROY
+Servicio para relacionar una lista de peticiones (a través de sus ids separados por comas) con una petición determinada.
+
+1. Una vez arrancado ir a la URL http://localhost:8088/gesproy/indexindv
+2. Poner el id de la petición en donde se van a relacionar la lista de peticiones
+3. Poner la lista de ids de peticiones que se relacionan con la anterior, separadas por comas
+3. Pinchar en el botón relacionar
+4. Mirar en el log
+
 
 ## Estructura de la hoja excel para imputaciones
 
