@@ -10,4 +10,5 @@ public interface PersonaRepository {
 	public void addPersona(Persona persona);
 	public void addPersona(String id, String nickname, String apiKey, String nombre, String primerApellido, String segundoApellido, String nombreCompleto);
 	public void updatePersona(String nickname, String newApiKey);
+	public void updatePersona(String nickname, String apiKey, String nombre, String primerApellido, String segundoApellido, String nombreCompleto);
 }

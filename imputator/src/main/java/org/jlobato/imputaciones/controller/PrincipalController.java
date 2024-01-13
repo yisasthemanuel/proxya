@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class PrincipaController {
+public class PrincipalController {
 	
 	@GetMapping({"", "/"})
 	public String main(Model model) {

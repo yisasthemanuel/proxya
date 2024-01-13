@@ -5,7 +5,7 @@ logging:
   level:
     org:
       jlobato:
-        seta: DEBUG
+        imputaciones: DEBUG
 management:
   endpoints:
     web:

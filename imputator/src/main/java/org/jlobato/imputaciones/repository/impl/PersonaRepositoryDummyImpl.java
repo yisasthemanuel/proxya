@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
  * The Class PersonaRepositoryDummyIImpl.
  */
 @Repository
-public class PersonaRepositoryDummyIImpl implements PersonaRepository {
+public class PersonaRepositoryDummyImpl implements PersonaRepository {
 	
 	/** The Constant PERSONAS. */
 	private static Map<String, Persona> personas = new HashMap<>();
@@ -33,7 +33,7 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 	 * Save repository.
 	 */
 	private static void saveRepository() {
-		String classLocation = PersonaRepositoryDummyIImpl.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String classLocation = PersonaRepositoryDummyImpl.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		File newFile = new File(new File(classLocation).getParentFile(), "personas.ser");
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(newFile))) {
 			oos.writeObject(personas);
@@ -47,7 +47,7 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 	 */
 	@SuppressWarnings("unchecked")
 	private static void loadRepository() {
-		try (ObjectInputStream ois = new ObjectInputStream(PersonaRepositoryDummyIImpl.class.getResourceAsStream("/personas.ser"))) {
+		try (ObjectInputStream ois = new ObjectInputStream(PersonaRepositoryDummyImpl.class.getResourceAsStream("/personas.ser"))) {
 			personas = (Map<String, Persona>)ois.readObject();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
@@ -126,19 +126,52 @@ public class PersonaRepositoryDummyIImpl implements PersonaRepository {
 	public void updatePersona(String nickname, String newApiKey) {
 		Persona persona = this.getPersona(nickname);
 		if (persona != null) {
-			personas.remove(nickname);
-			Persona personaNew = PersonaImpl.builder()
-					.id(persona.getId())
-					.nickname(persona.getNickname())
-					.apiKey(newApiKey)
-					.nombre(persona.getNombre())
-					.primerApellido(persona.getPrimerApellido())
-					.segundoApellido(persona.getSegundoApellido())
-					.nombreCompleto(persona.getNombreCompleto())
-					.build();
-			personas.put(nickname, personaNew);
-			saveRepository();
+			this.updatePersona(nickname, persona.getId(), newApiKey, persona.getNombre(), persona.getPrimerApellido(), persona.getSegundoApellido(), persona.getNombreCompleto());
+		}		
+	}
+
+	/**
+	 * Update persona.
+	 *
+	 * @param nickname the nickname
+	 * @param newApiKey the new api key
+	 * @param nombre the nombre
+	 * @param primerApellido the primer apellido
+	 * @param segundoApellido the segundo apellido
+	 * @param nombreCompleto the nombre completo
+	 */
+	@Override
+	public void updatePersona(String nickname, String newApiKey, String nombre, String primerApellido, String segundoApellido, String nombreCompleto) {
+		Persona persona = this.getPersona(nickname);
+		if (persona != null) {
+			this.updatePersona(nickname, persona.getId(), newApiKey, nombre, primerApellido, segundoApellido, nombreCompleto);
 		}
 	}
+	
+	/**
+	 * Update persona.
+	 *
+	 * @param nickname the nickname
+	 * @param id the id
+	 * @param newApiKey the new api key
+	 * @param nombre the nombre
+	 * @param primerApellido the primer apellido
+	 * @param segundoApellido the segundo apellido
+	 * @param nombreCompleto the nombre completo
+	 */
+	private void updatePersona(String nickname, String id, String newApiKey, String nombre, String primerApellido, String segundoApellido, String nombreCompleto) {
+		personas.remove(nickname);
+		Persona personaNew = PersonaImpl.builder()
+				.id(id)
+				.nickname(nickname)
+				.apiKey(newApiKey)
+				.nombre(nombre)
+				.primerApellido(primerApellido)
+				.segundoApellido(segundoApellido)
+				.nombreCompleto(nombreCompleto)
+				.build();
+		personas.put(nickname, personaNew);
+		saveRepository();
+	} 
 
 }

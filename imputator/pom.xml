@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jlobato.seta</groupId>
 	<artifactId>API_SETA</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>API_SETA_01</name>
-	<description>Ejemplo de uso de API SETA</description>
+	<version>0.0.2-SNAPSHOT</version>
+	<name>API_SETA_02</name>
+	<description>Integraciones con API RedMine: imputaciones y creación de peticiones en lote</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -14,10 +14,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.RC1</spring-cloud.version>
 		<docker.image.prefix>cteicu</docker.image.prefix>
-		<redmine-java-api.version>3.1.2</redmine-java-api.version>
+		<redmine-java-api.version>4.0.0.rc4</redmine-java-api.version>
 	</properties>
 
 	<dependencies>

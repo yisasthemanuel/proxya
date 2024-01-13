@@ -65,11 +65,19 @@ public class RedMineConfiguracion {
 	 * @throws KeyManagementException 
 	 */
 	@Bean
-	public HttpClient getHttpClient() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
+	HttpClient getHttpClient() throws KeyManagementException, NoSuchAlgorithmException, KeyStoreException, CertificateException, IOException {
 		//Configurar el cliente https
-		SSLContext sslContext = SSLContextBuilder.create().loadTrustMaterial(ResourceUtils.getFile("classpath:cacerts"), "changeit".toCharArray()).build();
+		SSLContext sslContext = SSLContextBuilder.create()
+				.loadTrustMaterial(ResourceUtils.getFile("classpath:cacerts"), "changeit".toCharArray())
+				.build();
 		
-		HttpClient httpClient = HttpClients.custom().setSSLContext(sslContext).setSSLHostnameVerifier(new NoopHostnameVerifier()).build();		
+		HttpClient httpClient = HttpClients.custom()
+				.setSSLContext(sslContext)
+				.setSSLHostnameVerifier(new NoopHostnameVerifier())
+				.addInterceptorFirst(new RequestLoggingInterceptor())
+				.addInterceptorFirst(new ResponseLoggingInterceptor())
+				.build();
+		
 		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
 		requestFactory.setHttpClient(httpClient);
 		
@@ -84,7 +92,7 @@ public class RedMineConfiguracion {
 	 * @return the formateador horas
 	 */
 	@Bean
-	public NumberFormat getFormateadorHoras() {
+	NumberFormat getFormateadorHoras() {
 		NumberFormat df = new DecimalFormat("##0.00", new DecimalFormatSymbols(Locale.ENGLISH));
 		((DecimalFormat) df).setParseBigDecimal(true);
 		return df;

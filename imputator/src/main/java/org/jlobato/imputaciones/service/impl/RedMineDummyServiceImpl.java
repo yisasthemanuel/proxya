@@ -47,6 +47,15 @@ public class RedMineDummyServiceImpl implements RedMineService {
 				.description("Gesproy: RedMine de educamosCLM")
 				.build()
 		);
+
+		REDMINES.put(4, RedMineTargetImpl.builder()
+				.id(4)
+				.uri("https://redmine.emergya.com/")
+				.apiKey("496ad4bc2a9a283b824065a176f01f76eb0623ec") //jmplobato
+				.projectName("Proxya")
+				.description("RedMine de Proxya")
+				.build()
+		);
 	}
 	
 	/**

@@ -12,6 +12,7 @@ import org.jlobato.imputaciones.repository.impl.ImputacionIndividualExcelReader;
 import org.jlobato.imputaciones.service.ImputacionService;
 import org.jlobato.imputaciones.service.RedMineService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ public class ImputacionesIndividualesController {
 	ImputacionIndividualExcelReader reader;
 	
 	@Autowired
+	@Qualifier("getDefaultPersona")
 	Persona defaultPersona;
 	
 	private static final Integer DEFAULT_REDMINE = 3;
@@ -114,9 +116,9 @@ public class ImputacionesIndividualesController {
 		
 		Integer source = null;
 		try {
-			source = new Integer(huMantenimiento);			
+			source = Integer.getInteger(huMantenimiento);			
 		} catch (Exception e) {
-			validationMessages.add("La HU destino debe ser un número");
+			validationMessages.add("La HU destino debe ser un número [" + huMantenimiento + "]");
 		}
 			
 		//Si no se ha seleccionado un redmine de destino
@@ -184,7 +186,7 @@ public class ImputacionesIndividualesController {
 		
 		for (int i = 0; i < listaPeticiones.length; i++) {
 			try {
-				result[i] = new Integer(listaPeticiones[i].replaceAll("\\s+", ""));
+				result[i] = Integer.getInteger(listaPeticiones[i].replaceAll("\\s+", ""));
 			} catch (Exception e) {
 				validationMessages.add("El id de la petición no es un número: " + listaPeticiones[i]);
 			}

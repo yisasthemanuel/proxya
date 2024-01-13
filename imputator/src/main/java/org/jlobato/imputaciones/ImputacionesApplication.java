@@ -1,9 +1,17 @@
 package org.jlobato.imputaciones;
 
+import java.util.Iterator;
+
 import org.jlobato.imputaciones.config.RedMineConfiguracion;
 import org.jlobato.imputaciones.model.Persona;
+import org.jlobato.imputaciones.model.Proyecto;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
+import org.jlobato.imputaciones.model.impl.ProyectoImpl;
+import org.jlobato.imputaciones.repository.PersonaRepository;
 import org.jlobato.imputaciones.service.ImputacionService;
+import org.jlobato.imputaciones.service.PeticionService;
+import org.jlobato.imputaciones.service.ProyectoService;
+import org.jlobato.imputaciones.service.RedMineService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,13 +43,62 @@ public class ImputacionesApplication {
 	 * @return the command line runner
 	 */
 	@Bean
-	public CommandLineRunner initSetaService(ImputacionService imputacionService, RedMineConfiguracion config) {
+	CommandLineRunner initSetaService(ImputacionService imputacionService, RedMineConfiguracion config) {
 		return args -> {
 			imputacionService.init();
-			log.info("Configuración: " + config.getRedMineProperties());
+			log.info("Configuración: {}",  config.getRedMineProperties());
 		};
 	}
 	
+	@Bean
+	CommandLineRunner addPeticionesMensuales(PeticionService peticionService, RedMineService redmineService, ProyectoService proyectoService) {
+		return args -> {
+//			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2024, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
+//			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
+//			log.info("Peticiones creadas: {}", peticiones);
+//			while (iteraPeticiones.hasNext()) {
+//				log.info("Petición: {}", iteraPeticiones.next());
+//			}
+		};
+	}
+	
+	@Bean
+	CommandLineRunner addPersona(PersonaRepository repository) {
+		return args -> {
+			
+//			repository.addPersona(PersonaImpl.builder()
+//					.id("1001")
+//					.apiKey("41da33a93b02a095c9838be5f5d0e83a72605277")
+//					.nickname("ffrm64")
+//					.nombre("Francisco")
+//					.primerApellido("Rodríguez")
+//					.segundoApellido("Mudarra")
+//					.nombreCompleto("Francisco Rodriguez Mudarra")
+//					.build()
+//					);
+//
+//			repository.addPersona(PersonaImpl.builder()
+//					.id("1002")
+//					.apiKey("569474ff307007e143605fbbf09c28ecaac29a62")
+//					.nickname("ookk01")
+//					.nombre("Ozlem")
+//					.primerApellido("Kutukcu")
+//					.segundoApellido("")
+//					.nombreCompleto("Ozlem Kutukcu")
+//					.build()
+//					);
+
+//			repository.updatePersona("mtll06", "1a5d97a3c09e6608ec9dcfd5ad920bd721110080", "María Teresa", "Lahoz", "López", "María Teresa Lahoz López");
+			Iterator<Persona> personas = repository.getAllPersonas().iterator();
+			
+			while (personas.hasNext()) {
+				log.info("PERSONA[{}]", personas.next());
+			}
+			
+		};
+	}
+
+
 //	@Bean
 //	public CommandLineRunner initRelacion(ImputacionService service, RedMineService tagetRedMine) {
 //		return args -> {
@@ -127,7 +184,7 @@ public class ImputacionesApplication {
 //			
 //		};
 //	}
-	
+    
 //	@Bean
 //	public CommandLineRunner initImputacion(ImputacionService service, RedMineTargetService targetRedMineService, SimpleDateFormat formateadorFechaImputaciones) {
 //		return args -> {
@@ -155,9 +212,9 @@ public class ImputacionesApplication {
 //			log.info("Imputado: {}", persona);
 //		};
 //	}
-	
-	@Bean
-	public Persona getDefaultPersona() {
+    
+    @Bean
+    Persona getDefaultPersona() {
 		Persona persona = PersonaImpl.builder()
 				.id("23")
 				.apiKey("ed7838edbbe8c1cee88413349219ed6967c7a90e")
@@ -170,6 +227,35 @@ public class ImputacionesApplication {
 		log.debug("Persona por defecto: " + persona);
 		return persona;
 	}
+	
+	@Bean
+	Persona getProxyaDefaultPersona() {
+		Persona persona = PersonaImpl.builder()
+				.id("323")
+				.apiKey("496ad4bc2a9a283b824065a176f01f76eb0623ec")
+				.nickname("jmplobato")
+				.nombre("Jesús Manuel")
+				.primerApellido("Pérez")
+				.segundoApellido("Lobato")
+				.nombreCompleto("Jesús Manuel Pérez Lobato")
+				.build();
+		log.debug("Persona por defecto: {}", persona);
+		return persona;
+	}
+	
+	@Bean
+	Proyecto getProyectoEducamos() {
+		Proyecto proyecto = ProyectoImpl.builder()
+				.descripcion("\"Formulario de acuerdo\":https://docs.google.com/spreadsheets/d/1m6lo__KHr3-NSGeoSkGT-5AAbIMkXCJBH4ImvzS_4eY/edit#gid=0\r\n"
+						+ "\"Plan de proyecto\":https://docs.google.com/spreadsheets/d/1-kyFW_ClB_OntCHBJe5NNwQ_S-f7n43rMskHsOjONFM/edit#gid=0")
+				.identificador("jccm-educamosclm")
+				.nombre("JCCM - 2021 - EDUCAMOSCLM")
+				.build();
+		log.debug("Proyecto por defecto: {}", proyecto);
+		return proyecto;
+		
+	}
+	
 	
 //	@Bean
 //	public CommandLineRunner readGoogleSheet() {

@@ -15,9 +15,11 @@ import org.jlobato.imputaciones.config.RedMineProperties;
 import org.jlobato.imputaciones.model.Estimacion;
 import org.jlobato.imputaciones.model.Imputacion;
 import org.jlobato.imputaciones.model.Persona;
+import org.jlobato.imputaciones.model.Peticion;
 import org.jlobato.imputaciones.model.RedMine;
 import org.jlobato.imputaciones.model.impl.EstimacionImpl;
 import org.jlobato.imputaciones.model.impl.ImputacionImpl;
+import org.jlobato.imputaciones.model.impl.PeticionImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,15 +28,12 @@ import com.taskadapter.redmineapi.NotFoundException;
 import com.taskadapter.redmineapi.RedmineException;
 import com.taskadapter.redmineapi.RedmineManager;
 import com.taskadapter.redmineapi.RedmineManagerFactory;
-import com.taskadapter.redmineapi.TimeEntryManager;
 import com.taskadapter.redmineapi.bean.CustomField;
 import com.taskadapter.redmineapi.bean.Issue;
+import com.taskadapter.redmineapi.bean.IssueRelation;
 import com.taskadapter.redmineapi.bean.TimeEntry;
-import com.taskadapter.redmineapi.bean.TimeEntryFactory;
 
 import lombok.extern.slf4j.Slf4j;
-
-/** The Constant log. */
 
 /** The Constant log. */
 @Slf4j
@@ -149,7 +148,7 @@ public class RedMineDriver {
 				issue.setDescription(descripcion);
 				// Actualizamos descripción para incluir lo de seguridad en la petición - FIN
 				
-				issueManager.update(issue);
+				issue.update();
 				
 				log.info("Imputación en petición [{}]-[{}] realizada: {}", imputacion.getId(), issue.getSubject(), imputacion);
 				
@@ -175,15 +174,15 @@ public class RedMineDriver {
 	
 	public void tiempoDedicado(String redmineURI, String apiKey, Integer issueId, Date fechaImputacion, Float horas, Integer activityId, String comentario) {
 		RedmineManager redMineManager = RedmineManagerFactory.createWithApiKey(redmineURI, apiKey, httpClient);
-		TimeEntryManager timeEntryManager = redMineManager.getTimeEntryManager();
-		TimeEntry entry = TimeEntryFactory.create();
+		
+		TimeEntry entry = new TimeEntry(redMineManager.getTransport());
 		entry.setSpentOn(fechaImputacion);
 		entry.setIssueId(issueId);
 		entry.setHours(horas);
 		entry.setActivityId(activityId);
 		entry.setComment(comentario);
 		try {
-			timeEntryManager.createTimeEntry(entry);
+			entry.create();
 		} catch (RedmineException e) {
 			log.error("Excepción en la imputación {}", entry, e);
 		}
@@ -195,7 +194,7 @@ public class RedMineDriver {
 		String relationText = "relates";
 		RedmineManager redMineManager = RedmineManagerFactory.createWithApiKey(redmineURI, apiKey, httpClient);
 		try {
-			redMineManager.getIssueManager().createRelation(sourceId, targetId, relationText);
+			new IssueRelation(redMineManager.getTransport(), sourceId, targetId, relationText).create();
 		} catch (RedmineException e) {
 			log.error("Excepción en al crear la relación entre la petición origen {} y la petición destino {}", sourceId, targetId, e);
 		}
@@ -304,7 +303,7 @@ public class RedMineDriver {
 				String notes = formateadorTextos.format(notesTemplate, "lote 3", formateadorFechaRestauracion.format(fechaEjecucion));
 				
 				issue.setNotes(notes);
-				issueManager.update(issue);
+				issue.update();
 				
 				log.info("Imputación en petición [{}]-[{}] restaurada: {}", imputacion.getId(), issue.getSubject(), imputacion);
 				
@@ -474,12 +473,60 @@ public class RedMineDriver {
 		try {
 			Issue hu = issueManager.getIssueById(estimacion.getId());
 			hu.setEstimatedHours(estimacion.getHoras());
-			issueManager.update(hu);
+			hu.update();
 		} catch (RedmineException e) {
 			log.error("Error al obtener la petición {}",  estimacion.getId(), e);
 		}
 		
 		log.info("Estimación realizada con éxito");
+	}
+
+	/**
+	 * Crea peticion.
+	 *
+	 * @param uri the uri
+	 * @param idProyecto the id proyecto
+	 * @param apiKey the api key
+	 * @param asunto the asunto
+	 * @param descripcion the descripcion
+	 * @param fechaInicio the fecha inicio
+	 * @param fechaFin the fecha fin
+	 * @return the peticion
+	 */
+	public Peticion creaPeticion(String uri, String idProyecto, String apiKey, String asunto, String descripcion, Date fechaInicio, Date fechaFin) {
+		Peticion result = null;
+		//
+		RedmineManager redMineManager = RedmineManagerFactory.createWithApiKey(uri, apiKey, httpClient);
+        Issue issue = new Issue();
+        issue.setTransport(redMineManager.getTransport());
+        
+        //Mejor meter una utilidad que saque el id del proyecto a partir del identificador 
+        try {
+			issue.setProjectId(redMineManager.getProjectManager().getProjectByKey(idProyecto).getId());
+		} catch (RedmineException e) {
+			log.error("Error al obtener el id de proyecto {}",  idProyecto, e);
+		}
+        issue.setSubject(asunto);
+        issue.setDescription(descripcion);
+
+        // Establecer la fecha de inicio y fecha de fin (si es aplicable)
+        issue.setStartDate(fechaInicio);  // Reemplaza la fecha de inicio según tus necesidades
+        issue.setDueDate(fechaFin);    // Reemplaza la fecha de fin según tus necesidades
+        
+        Issue createdIssue;
+		try {
+			createdIssue = issue.create();
+			result = PeticionImpl.builder()
+					.asunto(asunto)
+					.descripcion(descripcion)
+					.fechaInicio(fechaInicio)
+					.fechaFin(fechaFin)
+					.id(createdIssue.getId()).build();
+		} catch (RedmineException e) {
+			log.error("Error al crear la petición en el RedMine destino: {}",  uri, e);
+		}
+		
+		return result;
 	}	
 
 

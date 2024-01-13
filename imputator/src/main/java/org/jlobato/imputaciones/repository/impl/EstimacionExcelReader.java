@@ -24,6 +24,7 @@ import org.jlobato.imputaciones.repository.EstimacionReader;
 import org.jlobato.imputaciones.repository.PersonaRepository;
 import org.jlobato.imputaciones.util.ParseadorHorasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 public class EstimacionExcelReader implements EstimacionReader {
 
 	@Autowired
-	private Persona personaPorDefecto;
+	@Qualifier("getDefaultPersona")
+	private Persona defaultPersona;
 	
 	@Autowired
 	private SimpleDateFormat formateadorFechaImputaciones;
@@ -98,7 +100,7 @@ public class EstimacionExcelReader implements EstimacionReader {
 						case 1: // Persona a la que corresponde la imputacion
 							Persona persona = personaRepos.getPersona(value);
 							if (persona == null) {
-								persona = personaPorDefecto;
+								persona = defaultPersona;
 							}
 							estimacionBuilder.persona(persona);
 							break;

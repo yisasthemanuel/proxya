@@ -26,6 +26,7 @@ import org.jlobato.imputaciones.repository.ImputacionIndividualReader;
 import org.jlobato.imputaciones.repository.PersonaRepository;
 import org.jlobato.imputaciones.util.ParseadorHorasUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ImputacionIndividualExcelReader implements ImputacionIndividualReader {
 	
 	@Autowired
+	@Qualifier("getDefaultPersona")
 	private Persona personaPorDefecto;
 	
 	@Autowired
