@@ -50,6 +50,14 @@ public class ImputacionesApplication {
 		};
 	}
 	
+	/**
+	 * Crea peticiones mensuales.
+	 *
+	 * @param peticionService Servicio para crear las peticiones mensuales
+	 * @param redmineService Servicio para el Redmine en donde se crearán las peticiones
+	 * @param proyectoService Servicio para obtener el proyecto en donde se crearán las peticiones
+	 * @return 
+	 */
 	@Bean
 	CommandLineRunner addPeticionesMensuales(PeticionService peticionService, RedMineService redmineService, ProyectoService proyectoService) {
 		return args -> {
@@ -62,33 +70,16 @@ public class ImputacionesApplication {
 		};
 	}
 	
+	/**
+	 * Lista las personas que están en el repositorio. Opcionalmente incluye más personas
+	 *
+	 * @param repository El repositorio de personas
+	 * @return 
+	 */
 	@Bean
 	CommandLineRunner addPersona(PersonaRepository repository) {
 		return args -> {
 			
-//			repository.addPersona(PersonaImpl.builder()
-//					.id("1001")
-//					.apiKey("41da33a93b02a095c9838be5f5d0e83a72605277")
-//					.nickname("ffrm64")
-//					.nombre("Francisco")
-//					.primerApellido("Rodríguez")
-//					.segundoApellido("Mudarra")
-//					.nombreCompleto("Francisco Rodriguez Mudarra")
-//					.build()
-//					);
-//
-//			repository.addPersona(PersonaImpl.builder()
-//					.id("1002")
-//					.apiKey("569474ff307007e143605fbbf09c28ecaac29a62")
-//					.nickname("ookk01")
-//					.nombre("Ozlem")
-//					.primerApellido("Kutukcu")
-//					.segundoApellido("")
-//					.nombreCompleto("Ozlem Kutukcu")
-//					.build()
-//					);
-
-//			repository.updatePersona("mtll06", "1a5d97a3c09e6608ec9dcfd5ad920bd721110080", "María Teresa", "Lahoz", "López", "María Teresa Lahoz López");
 			Iterator<Persona> personas = repository.getAllPersonas().iterator();
 			
 			while (personas.hasNext()) {
@@ -98,121 +89,11 @@ public class ImputacionesApplication {
 		};
 	}
 
-
-//	@Bean
-//	public CommandLineRunner initRelacion(ImputacionService service, RedMineService tagetRedMine) {
-//		return args -> {
-//			Integer source = 164731;
-//			
-//			Integer[] targets = {
-//					131753	,
-//					141090	,
-//					143159	,
-//					143161	,
-//					145629	,
-//					147450	,
-//					147458	,
-//					150382	,
-//					150384	,
-//					150389	,
-//					151160	,
-//					151161	,
-//					151165	,
-//					151167	,
-//					151923	,
-//					151924	,
-//					151925	,
-//					152490	,
-//					152800	,
-//					153167	,
-//					153977	,
-//					155049	,
-//					155247	,
-//					155476	,
-//					155893	,
-//					156070	,
-//					156086	,
-//					156519	,
-//					157242	,
-//					157244	,
-//					157515	,
-//					157628	,
-//					157886	,
-//					157897	,
-//					157899	,
-//					157901	,
-//					158067	,
-//					158094	,
-//					158132	,
-//					158168	,
-//					158449	,
-//					158617	,
-//					158736	,
-//					158738	,
-//					158739	,
-//					158755	,
-//					158840	,
-//					158914	,
-//					158920	,
-//					159018	,
-//					159062	,
-//					159140	,
-//					159196	,
-//					159205	,
-//					159336	,
-//					159357	,
-//					159358	,
-//					159359	,
-//					159377	,
-//					159380	,
-//					159385	,
-//					159479	,
-//					159511	,
-//					159606	,
-//					159608	,
-//					160021	
-//			};
-//			
-//			for (int i = 0; i < targets.length; i++) {
-//				service.creaRelacion(tagetRedMine.getRedMine(3), getDefaultPersona(), source, targets[i]);
-//				log.info("Relacionados: En RedMine {} por la persona {} la petición {} con la petición {}", tagetRedMine.getRedMine(3).getUri(), getDefaultPersona().getNombreCompleto(), source, targets[i]);
-//			}
-//			
-//			log.info("######");
-//			log.info("Fin del proceso de relación de peticiones. Se han relacionado {} peticiones a la petición {}", targets.length, source);
-//			log.info("######");
-//			
-//		};
-//	}
-    
-//	@Bean
-//	public CommandLineRunner initImputacion(ImputacionService service, RedMineTargetService targetRedMineService, SimpleDateFormat formateadorFechaImputaciones) {
-//		return args -> {
-//			log.info("Imputando: " + service);
-//			Persona persona = PersonaImpl.builder()
-//					.id("23")
-//					.apiKey("ed7838edbbe8c1cee88413349219ed6967c7a90e")
-//					.nickname("jmpl06")
-//					.nombre("Jesús Manuel")
-//					.primerApellido("Pérez")
-//					.segundoApellido("Lobato")
-//					.nombreCompleto("Jesús Manuel Pérez Lobato")
-//					.build();
-//			ImputacionIndividual imputacion = ImputacionIndividualImpl.builder()
-//					.id(94659)
-//					.persona(persona)
-//					.fecha(formateadorFechaImputaciones.parse("18/10/2021"))
-//					.horas(8.5f)
-//					.actividad(34)
-//					.comentario("Seguimiento y gestión")
-//					.build();
-//			
-//			service.tiempoDedicado(targetRedMineService.getRedMine(3), imputacion);
-//					
-//			log.info("Imputado: {}", persona);
-//		};
-//	}
-    
+    /**
+     * Devuelve la persona por defecto que crea la peticiones cualquier Redmine menos el de Proxya.
+     *
+     * @return Objeto persona para todos los redmines
+     */
     @Bean
     Persona getDefaultPersona() {
 		Persona persona = PersonaImpl.builder()
@@ -228,6 +109,11 @@ public class ImputacionesApplication {
 		return persona;
 	}
 	
+	/**
+	 * Devuelve la persona por defecto que crea la peticiones en el Redmine de Proxya.
+	 *
+	 * @return Objeto persona para el Redmine de Proxya
+	 */
 	@Bean
 	Persona getProxyaDefaultPersona() {
 		Persona persona = PersonaImpl.builder()
@@ -243,6 +129,11 @@ public class ImputacionesApplication {
 		return persona;
 	}
 	
+	/**
+	 * Obtiene el proyecto por defecto en caso de no tener ninguno en el repositorio de proyectos.
+	 *
+	 * @return Devuelve los datos del proyecto educamosCLM
+	 */
 	@Bean
 	Proyecto getProyectoEducamos() {
 		Proyecto proyecto = ProyectoImpl.builder()
@@ -254,13 +145,5 @@ public class ImputacionesApplication {
 		log.debug("Proyecto por defecto: {}", proyecto);
 		return proyecto;
 		
-	}
-	
-	
-//	@Bean
-//	public CommandLineRunner readGoogleSheet() {
-//		return args -> {
-//			GoogleAuthorizeUtil.readSheet();
-//		};
-//	}
+	}	
 }
