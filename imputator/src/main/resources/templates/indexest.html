@@ -6,29 +6,40 @@
     <meta name="description" content="Estimaciones view">
     <meta name="author" content="Yisas">
 
-    <title>Estimaciones</title>
+    <title>Estimaciones Gesproy</title>
 
   </head>
   <body>
+  	  <div>
+		  <h3>Imputaciones Gesproy</h3>
+	  </div>
+	  <br>
+	  
   <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/gesproy}">
   	<input type="hidden" name="targetRedMine" id="targetRedMine" value="3"/>
   	<div>
-		<label for="fichEstimaciones">Estimaciones</label>
+		<label for="fichEstimaciones">1. Elige el excel en el que están las estimaciones a subir. <a href="/excels/example.estimaciones.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
 		<div>
 			<input id="fichEstimaciones" name="fichEstimaciones" type="file" placeholder="Estimaciones">
 		</div>
 	</div>
+	<br>
 	<div>
-		<label for="singlebutton">Estimar</label>
+		<label for="singlebutton">2. Al pulsar en 'Estimar' se realizarán las estimaciones del excel seleccionado en Gesproy</label>
 		<div>
 			<button id="singlebutton" name="singlebutton" th:formaction="@{/gesproy/cargaEstimaciones}">Estimar</button>
 		</div>
 	</div>
+	<br>
 	<div>
 		<span th:text="${validaciones}">
 		</span>
 	</div>
 	
   </form>
+  <br>
+  <div>
+  	<a id="principalButton" name="principalButton" th:href="@{/}">Volver a la página principal</button>
+  </div>
   </body>
 </html>

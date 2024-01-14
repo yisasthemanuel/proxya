@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jlobato.seta</groupId>
 	<artifactId>API_SETA</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>API_SETA_02</name>
 	<description>Integraciones con API RedMine: imputaciones y creación de peticiones en lote</description>
 	<parent>
@@ -132,6 +132,7 @@
 				<excludes>
 					<exclude>cacerts</exclude>
 					<exclude>personas.ser</exclude>
+					<exclude>static/excels/**</exclude>
 				</excludes>
 			</resource>
 			<resource>
@@ -140,6 +141,7 @@
 				<includes>
 					<include>cacerts</include>
 					<include>personas.ser</include>
+					<include>static/excels/**</include>
 				</includes>
 			</resource>
 		</resources>

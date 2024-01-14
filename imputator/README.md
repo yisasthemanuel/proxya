@@ -1,22 +1,25 @@
+# UTILIDADES API REDMINE
+
+Desde este servicio tenemos acceso a varias utilidades relacionadas con la integración a distintos Redmines a través de la API Java de Redmine
+
+1. Imputar horas de distintos usuarios en Gesproy. Se explica con más detalle en la sección 'Imputator Gesproy'
+2. Añadir una lista de peticiones como peticiones relacionadas con una en concreto, también en Gesproy. Se explica con más detalle en la sección 'Relacionator Gesproy'
+3. Estimar peticiones en Gesproy. Se explica con más detalle en la sección 'Estimator Gesproy'
+4. Imputar horas en el Redmine de CTEICU (Redmine SETA). Se explica con más detalle en la sección 'Imputator SETA'
+
 # IMPUTATOR GESPROY
 
 Servicio para la imputación de horas en Gesproy desde una hoja excel. Depende de un servicio de cloud config que es de donde lee la configuración para conectarse a Gesproy.
 Por defecto se ejecuta en el puerto 8088
 
-1. Una vez arrancado ir a la URL http://localhost:8088/gesproy/indexindv
-2. Pinchar en Seleccionar archivo y elegir la hoja de cálculo con la hoja IMPUTACIONES en el formato adecuado. En la hoja src/test/resources/imputacion.modelo.xlsx hay un ejemplo
+1. Una vez arrancado ir a la URL http://localhost:8088 y seleccionar la opción 'Imputaciones Gesproy' o bien ir directamente a http://localhost:8088/gesproy/indexindv
+2. Pinchar en Seleccionar archivo y elegir la hoja de cálculo con la hoja IMPUTACIONES en el formato adecuado. En la siguiente hoja hay un [ejemplo](src/test/resources/imputacion.modelo.xlsx)
 3. Pichar en el botón imputar
 4. Mirar en el log
 
-# RELACIONATOR GESPROY
-Servicio para relacionar una lista de peticiones (a través de sus ids separados por comas) con una petición determinada.
+## Requisitos previos
 
-1. Una vez arrancado ir a la URL http://localhost:8088/gesproy/indexindv
-2. Poner el id de la petición en donde se van a relacionar la lista de peticiones
-3. Poner la lista de ids de peticiones que se relacionan con la anterior, separadas por comas
-3. Pinchar en el botón relacionar
-4. Mirar en el log
-
+1. Tener acceso por red a Gesproy (Redmine de educamosCLM). Para ello habrá que estar dentro de la red del organismo o tener VPN de la JCCM para acceder desde fuera
 
 ## Estructura de la hoja excel para imputaciones
 
@@ -25,9 +28,9 @@ La hoja excel debe tener una hoja llamada ESTIMACIONES que contiene una tabla co
 1. PETICION. Número de la HU/tarea en Gesproy en la que se va a imputar
 2. PERSONA. Persona para la que se hace la imputación. Contiene el id del ldap (id de Gesproy) de la persona. El mapeo entre este id y las personas del equipo lo tenéis en la siguiente hoja de google: https://docs.google.com/spreadsheets/d/1hDE1l6Nha3siXm0cUS1Zgj6Ey0js-YiubtF2CmFI-Bk/edit#gid=1820605664
 3. FECHA. Fecha de la imputación en formato DD/MM/AAAA
-4. HORAS. Horas a imputar. Para los decimales utilizamos coma.
-5. ACTIVIDAD. Identificador de la actividad para la imputación. La relación entre estos códigos y la descripción de la actividad la tenemos en la hoja ACTIVIDAD.
-6. COMENTARIO. Es el único campo opcional. Ahí se pone lo que va a salir de comentario en la imputación.
+4. HORAS. Horas a imputar. Para los decimales utilizamos coma
+5. ACTIVIDAD. Identificador de la actividad para la imputación. La relación entre estos códigos y la descripción de la actividad la tenemos en la sección 'Correspondencia de códigos de actividades'
+6. COMENTARIO. Es el único campo opcional. Ahí se pone lo que va a salir de comentario en la imputación
 
 ## Correspondencia de códigos de actividades
 
@@ -47,13 +50,56 @@ La hoja excel debe tener una hoja llamada ESTIMACIONES que contiene una tabla co
 | Reunión | 30 |
 | Tratamiento directo de datos | 17 |
 
+## TODOs
+
+1. Mostrar informe de ejecución en el navegador
+2. Cerrar una versión inicial del README.MD
+
+# RELACIONATOR GESPROY
+Servicio para relacionar una lista de peticiones (a través de sus ids separados por comas) con una petición determinada.
+
+1. Una vez arrancado ir a la URL http://localhost:8088 y seleccionar la opción 'Imputaciones Gesproy' o bien ir directamente a http://localhost:8088/gesproy/indexindv
+2. Poner el id de la petición en donde se van a relacionar la lista de peticiones
+3. Poner la lista de ids de peticiones que se relacionan con la anterior, separadas por comas
+4. Pinchar en el botón relacionar
+5. Mirar en el log
+
+## Requisitos previos
+
+1. Tener acceso por red a Gesproy (Redmine de educamosCLM). Para ello habrá que estar dentro de la red del organismo o tener VPN de la JCCM para acceder desde fuera
 
 ## TODOs
 
-1. Mostrar informe de ejecución en el navegador.
+1. Mostrar informe de ejecución en el navegador
 2. Cerrar una versión inicial del README.MD
 
-# API SETA
+# ESTIMATOR GESPROY
+Servicio para realizar estimaciones en bloque, en base a la información que se encuentra en una hoja excel.
+
+1. Una vez arrancado ir a la URL http://localhost:8088 y seleccionar la opción 'Estimaciones Gesproy' o bien ir directamente a http://localhost:8088/gesproy/indexest
+2. Pinchar en Seleccionar archivo y elegir la hoja de cálculo con la hoja IMPUTACIONES en el formato adecuado
+3. Poner la lista de ids de peticiones que se relacionan con la anterior, separadas por comas
+3. Pinchar en el botón estimar
+4. Mirar en el log
+
+## Requisitos previos
+
+1. Tener acceso por red a Gesproy (Redmine de educamosCLM). Para ello habrá que estar dentro de la red del organismo o tener VPN de la JCCM para acceder desde fuera
+
+## TODOs
+
+1. Mostrar informe de ejecución en el navegador
+2. Poner el formato de la hoja excel para estimaciones
+
+# IMPUTATOR SETA
+
+Servicio para la imputación de horas en SETA desde una hoja excel. Por defecto se ejecuta en el puerto 8088
+
+1. Una vez arrancado ir a la URL http://localhost:8088 y seleccionar la opción 'Imputaciones SETA - CTEICU' o bien ir directamente a http://localhost:8088/imputaciones/index
+2. Elegir el Redmine destino para las imputaciones. Aunque se muestre un desplegable con todos los Redmines registrados en la herramienta, en este caso siempre seleccionaremos el Redmine SETA.
+3. Pinchar en Seleccionar archivo y elegir la hoja de cálculo con la hoja IMPUTACIONES en el formato adecuado. En la hoja src/test/resources/Calculadora12.xlsx hay un ejemplo
+3. Pichar en el botón imputar
+4. Mirar en el log
 
 ## Requisitos previos
 
@@ -80,6 +126,10 @@ keytool -list -v -alias setaYYYYMM -storepass changeit
 El almacén de certificados que usa la aplicación debe colocarse en src/main/resources.
 
 Página de referencia (en inglés): [“PKIX path building failed”](https://stackoverflow.com/questions/21076179/pkix-path-building-failed-and-unable-to-find-valid-certification-path-to-requ)
+
+## TODOs
+
+1. Mostrar informe de ejecución en el navegador
 
 
 # A PARTIR DE AQUÍ NO VALE!

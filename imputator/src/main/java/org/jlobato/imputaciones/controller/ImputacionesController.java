@@ -31,8 +31,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/imputaciones")
 
 /** The Constant log. */
-
-/** The Constant log. */
 @Slf4j
 public class ImputacionesController {
 	

@@ -6,16 +6,20 @@
     <meta name="description" content="Imputaciones view">
     <meta name="author" content="Yisas">
 
-    <title>Imputaciones</title>
+    <title>Imputaciones SETA - CTEICU</title>
 
   </head>
   <body>
+	  <div>
+		  <h3>Imputaciones SETA - CTEICU</h3>
+	  </div>
+	  <br>
   <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/imputaciones}">
   	<div>
 	  <table>
 	  	<tr>
 	  		<td>
-	  			<label for="targetRedMine">RedMine destino: </label> 
+	  			<label for="targetRedMine">1. Elige el RedMine de destino de las imputaciones (normalmente se eligirá SETA): </label> 
 	  			<select name="targetRedMine" id="targetRedMine">
 	  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
 	  				<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
@@ -27,39 +31,32 @@
 	 </div>
 	  <br>
 	  <div>
-	  <table>
-	  	<tr>
-	  		<th>Propiedad</th>
-	  		<th>Valor</th>
-	  	</tr>
-	  	<tr th:each="propiedad : ${imputacionesProperties}">
-	  		<td th:text="${propiedad.key}">seta.uriSETA</td>
-	  		<td th:text="${propiedad.value}">http://seta.cciu.junta-andalucia.es/</td>
-	  	</tr>
-	  </table>
-	  </div>
-	  <br>
-	  <br>
-	  <div>
-		  <label for="fichImputaciones">Imputaciones</label>
+		  <label for="fichImputaciones">2. Subimos el excel que contiene las peticiones y las horas por perfil que se imputarán. <a href="/excels/example.api.seta.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
 		  <div>
 		  	<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
 		  </div>
 	  </div>
+	  <br>
 	  <div>
-	  	<label for="singlebutton">Imputar</label>
+	  	<label for="singlebutton">3. Pulsamos en el botón 'Imputar' para hacer efectivas las imputaciones del excel</label>
 		<div>
 			<button id="singlebutton" name="singlebutton" th:formaction="@{/imputaciones/nuevaCarga}">Imputar</button>
 		</div>
 	  </div>
+	  <br>
 	  <div>
 	  	<span th:text="${testDone}">
 	  		Testeando
 	  	</span>
 	  </div>
+	  <br>
 	  <div>
 	  	<a id="restorebutton" name="restorebutton" th:href="@{/imputaciones/restore}">Restaurar</button>
 	  </div>
   </form>
+  <br>
+  <div>
+  	<a id="principalButton" name="principalButton" th:href="@{/}">Volver a la página principal</button>
+  </div>
   </body>
 </html>
