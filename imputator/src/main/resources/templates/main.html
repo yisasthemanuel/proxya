@@ -1,23 +1,30 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Imputaciones view">
-    <meta name="author" content="Yisas">
 
-    <title>Principal</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Imputaciones view">
+  <meta name="author" content="Yisas">
 
-  </head>
-  <body>
-  	<div>
-		<a id="cteicubutton" name="cteicubutton" th:href="@{/imputaciones/index}" title="Opción que utilizo normalmente para realizar las imputaciones en el Redmine de la Consejería de Universidad de la Junta de Andalucía (SETA)">Imputaciones SETA - CTEICU</button>
-	</div>
-	<div>
-		<a id="gesproybutton" name="gesproybutton" th:href="@{/gesproy/indexindv}" title="Opción que utilizo para realizar las imputaciones en Gesproy en base a una hoja excel">Imputaciones Gesproy</button>
-	</div>
-	<div>
-		<a id="estimacionesbutton" name="estimacionesbutton" th:href="@{/gesproy/indexest}" title="Opción que utilizo para realizar las estimaciones en Gesproy en base a una hoja excel">Estimaciones Gesproy</button>
-	</div>
-  </body>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+
+  <title>Principal</title>
+
+</head>
+
+<body>
+  <section id="main">
+    <a id="cteicubutton" name="cteicubutton" th:href="@{/imputaciones/index}" title="Opción que utilizo normalmente para realizar las imputaciones en el Redmine de la Consejería de Universidad de la Junta de Andalucía (SETA)">
+      Imputaciones SETA - CTEICU
+    </a>
+    <a id="gesproybutton" name="gesproybutton" th:href="@{/gesproy/indexindv}" title="Opción que utilizo para realizar las imputaciones en Gesproy en base a una hoja excel">
+      Imputaciones Gesproy
+    </a>
+    <a id="estimacionesbutton" name="estimacionesbutton" th:href="@{/gesproy/indexest}" title="Opción que utilizo para realizar las estimaciones en Gesproy en base a una hoja excel">
+      Estimaciones Gesproy
+    </a>
+  </section>
+</body>
+
 </html>

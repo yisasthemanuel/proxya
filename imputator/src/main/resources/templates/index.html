@@ -6,42 +6,34 @@
     <meta name="description" content="Imputaciones view">
     <meta name="author" content="Yisas">
 
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+
     <title>Imputaciones SETA - CTEICU</title>
 
   </head>
   <body>
 	  <div>
-		  <h3>Imputaciones SETA - CTEICU</h3>
+		  <h1 class="no-margin">Imputaciones SETA - CTEICU</h1>
 	  </div>
 	  <br>
-  <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/imputaciones}">
-  	<div>
-	  <table>
-	  	<tr>
-	  		<td>
-	  			<label for="targetRedMine">1. Elige el RedMine de destino de las imputaciones (normalmente se eligirá SETA): </label> 
-	  			<select name="targetRedMine" id="targetRedMine">
-	  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
-	  				<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
-	    			</option>
-				</select>
-	  		</td>
-	  	</tr>
-	  </table>
+  <form class="formulario card" method="post" enctype="multipart/form-data" action="#" th:action="@{/imputaciones}">
+  	<div class="input-group">
+		<label for="targetRedMine">1. Elige el RedMine de destino de las imputaciones (normalmente se eligirá SETA): </label>
+		<select name="targetRedMine" id="targetRedMine">
+			<option th:value="-1" th:text="${seleccioneOpcionText}"></option>
+			<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
+			</option>
+		</select>
 	 </div>
 	  <br>
-	  <div>
-		  <label for="fichImputaciones">2. Subimos el excel que contiene las peticiones y las horas por perfil que se imputarán. <a href="/excels/example.api.seta.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
-		  <div>
-		  	<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
-		  </div>
+	  <div class="input-group">
+		  <label for="fichImputaciones">2. Subimos el excel que contiene las peticiones y las horas por perfil que se imputarán. <a href="/excels/example.api.seta.xlsx" target="_blank" class="link">Aquí</a> puedes descargar un excel con la estructura esperada</label>
+		  <input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
 	  </div>
 	  <br>
-	  <div>
+	  <div class="input-group">
 	  	<label for="singlebutton">3. Pulsamos en el botón 'Imputar' para hacer efectivas las imputaciones del excel</label>
-		<div>
-			<button id="singlebutton" name="singlebutton" th:formaction="@{/imputaciones/nuevaCarga}">Imputar</button>
-		</div>
+		<button id="singlebutton" class="btn" name="singlebutton" th:formaction="@{/imputaciones/nuevaCarga}">Imputar</button>
 	  </div>
 	  <br>
 	  <div>
@@ -51,12 +43,12 @@
 	  </div>
 	  <br>
 	  <div>
-	  	<a id="restorebutton" name="restorebutton" th:href="@{/imputaciones/restore}">Restaurar</button>
+	  	<a id="restorebutton" class="link" name="restorebutton" th:href="@{/imputaciones/restore}">Restaurar</button>
 	  </div>
   </form>
   <br>
   <div>
-  	<a id="principalButton" name="principalButton" th:href="@{/}">Volver a la página principal</button>
+  	<a id="principalButton" class="link" name="principalButton" th:href="@{/}">🏠 Volver a la página principal</button>
   </div>
   </body>
 </html>

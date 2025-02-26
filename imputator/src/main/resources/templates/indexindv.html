@@ -6,73 +6,64 @@
     <meta name="description" content="Imputaciones view">
     <meta name="author" content="Yisas">
 
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+
     <title>Imputaciones Gesproy</title>
 
   </head>
   <body>
-  	  <div>
-		  <h3>Imputaciones Gesproy</h3>
-		  <h4>
-			  Desde aquí podrás hacer lo siguiente:
-			  <ol>
-				  <li>Hacer imputaciones en Gesproy a partir de una hoja excel</li>
-				  <li>Relacionar una lista de peticiones de Gesproy con una petición concreta</li>
-			  </ol>			  
-		  </h4>
-	  </div>
-
-  <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/gesproy}">
-  	<input type="hidden" name="targetRedMine" id="targetRedMine" value="3"/>
-  	<div>
-		<h5>Realizar imputaciones a Gesproy</h5>
-	  	<div>
-			<label for="fichImputaciones">1. Elige el excel en el que están las imputaciones a realizar. <a href="/excels/example.imputaciones.individuales.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
+	<div class="container">
+		<div>
+			<h1>Imputaciones Gesproy</h1>
 			<div>
+				<strong>Desde aquí podrás hacer lo siguiente:</strong>
+				<ol>
+					<li>Hacer imputaciones en Gesproy a partir de una hoja excel</li>
+					<li>Relacionar una lista de peticiones de Gesproy con una petición concreta</li>
+				</ol>			  
+			</div>
+		</div>
+	
+	  <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/gesproy}">
+		  <input type="hidden" name="targetRedMine" id="targetRedMine" value="3"/>
+		  <div class="card">
+			<h2>Realizar imputaciones a Gesproy</h2>
+			  <div class="input-group">
+				<label for="fichImputaciones">1. Elige el excel en el que están las imputaciones a realizar. <a href="/excels/example.imputaciones.individuales.xlsx" target="_blank" class="link">Aquí</a> puedes descargar un excel con la estructura esperada</label>
 				<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
 			</div>
-		</div>
-		<br>
-		<div>
-			<label for="singlebutton">2. Al pulsar en 'Imputar' se realizarán las imputaciones del excel seleccionado en Gesproy</label>
-			<div>
-				<button id="singlebutton" name="singlebutton" th:formaction="@{/gesproy/cargaImputaciones}">Imputar</button>
+			<br>
+			<div class="input-group">
+				<label for="singlebutton">2. Al pulsar en 'Imputar' se realizarán las imputaciones del excel seleccionado en Gesproy</label>
+				<button id="singlebutton" class="btn" name="singlebutton" th:formaction="@{/gesproy/cargaImputaciones}">Imputar</button>
 			</div>
 		</div>
-	</div>
-	<br>
-	<div>
-		<h5>Relacionar peticiones en Gesproy</h5>
-	  	<div>
-			<label for="huMantenimiento">1. Introduce el número de petición en donde se crearán las relaciones con la list de peticiones del siguiente paso</label>
-			<div>
+		<br>
+		<div class="card">
+			<h2>Relacionar peticiones en Gesproy</h2>
+			  <div class="input-group">
+				<label for="huMantenimiento">1. Introduce el número de petición en donde se crearán las relaciones con la list de peticiones del siguiente paso</label>
 				<input id="huMantenimiento" name="huMantenimiento" type="text" placeholder="#HU origen de las peticiones">
 			</div>
-		</div>
-		<br>
-	  	<div>
-			<label for="peticionesRelacionadas">2. Enumera las peticiones que se relacionará con la anterior (separadas por coma)</label>
-			<div>
-				<textarea id="peticionesRelacionadas" name="peticionesRelacionadas" placeholder="Lista de peticiones separadas por comas"
-					rows="20" cols="30">
-				</textarea>
+			<br>
+			  <div class="input-group">
+				<label for="peticionesRelacionadas">2. Enumera las peticiones que se relacionará con la anterior (separadas por coma)</label>
+				<textarea id="peticionesRelacionadas" name="peticionesRelacionadas" placeholder="Lista de peticiones separadas por comas"></textarea>
+			</div>
+			<div class="input-group">
+				<label for="relbutton">3. Al pulsar en 'Relacionar peticiones' se harán efectivas las relaciones (de tipo 'relacionada con') de la lista de peticiones del paso 2 con la petición del paso 1</label>
+				<button id="relbutton" class="btn" name="relbutton" th:formaction="@{/gesproy/relacionaPeticiones}">Relacionar peticiones</button>
 			</div>
 		</div>
 		<div>
-			<label for="relbutton">3. Al pulsar en 'Relacionar peticiones' se harán efectivas las relaciones (de tipo 'relacionada con') de la lista de peticiones del paso 2 con la petición del paso 1</label>
-			<div>
-				<button id="relbutton" name="relbutton" th:formaction="@{/gesproy/relacionaPeticiones}">Relaciona peticiones</button>
-			</div>
+			<span th:text="${validaciones}"></span>
 		</div>
+		
+	  </form>
+	  <br>
+	  <div>
+		  <a id="principalButton" class="link" name="principalButton" th:href="@{/}">🏠 Volver a la página principal</button>
+	  </div>
 	</div>
-	<div>
-		<span th:text="${validaciones}">
-		</span>
-	</div>
-	
-  </form>
-  <br>
-  <div>
-  	<a id="principalButton" name="principalButton" th:href="@{/}">Volver a la página principal</button>
-  </div>
   </body>
 </html>

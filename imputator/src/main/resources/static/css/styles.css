@@ -1,0 +1,157 @@
+:root {
+    --primary: #3a5ada;
+    --primary-hover: #213481;
+    --gray-50: #f9fafb;
+    --gray-200: #e5e7eb;
+    --gray-500: #808080;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    padding: 2rem;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    a {
+        color: var(--primary);
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 5px 0;
+        border: 1px solid var(--primary);
+        border-radius: 0.5rem;
+        transition: transform 0.3s;
+        will-change: contents;
+    }
+
+    a:hover {
+        transform: scale(1.05);
+    }
+}
+
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+    padding: 2rem;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background: var(--primary-hover);
+}
+
+.link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+li::marker {
+    color: var(--primary);
+}
+
+.input-group {
+    margin-bottom: 0.5rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+input[type="file"],
+input[type="text"],
+select,
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 75%;
+    padding: 0.75rem;
+    border: 1px solid var(--gray-500);
+    border-radius: 0.5rem;
+    background: white;
+    color: var(--gray-800);
+    font-size: 1rem;
+}
+
+input[type="file"] {
+    border: 1px solid var(--gray-200);
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    input[type="file"],
+    input[type="text"],
+    select,
+    textarea {
+        width: 95%;
+    }
+}
