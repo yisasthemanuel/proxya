@@ -1,5 +1,7 @@
 package org.jlobato.imputaciones.model.impl;
 
+import java.text.Collator;
+
 import org.jlobato.imputaciones.model.Persona;
 
 import lombok.Builder;
@@ -14,7 +16,19 @@ import lombok.ToString;
  *
  * @return the api key
  */
+
+/**
+ * Gets the api key.
+ *
+ * @return the api key
+ */
 @Getter
+
+/**
+ * Sets the api key.
+ *
+ * @param apiKey the new api key
+ */
 
 /**
  * Sets the api key.
@@ -28,6 +42,12 @@ import lombok.ToString;
  *
  * @return the java.lang. string
  */
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 
 /**
@@ -35,7 +55,19 @@ import lombok.ToString;
  *
  * @return the int
  */
+
+/**
+ * Hash code.
+ *
+ * @return the int
+ */
 @EqualsAndHashCode
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.
@@ -68,5 +100,17 @@ public class PersonaImpl implements Persona {
 	
 	/** The api key. */
 	private String apiKey;
+
+	/**
+	 * Compare to.
+	 *
+	 * @param other the other
+	 * @return the int
+	 */
+	@Override
+	public int compareTo(Persona other) {
+		Collator collator = Collator.getInstance(); //Comparamos según el locale
+		return collator.compare(this.nombreCompleto, other.getNombreCompleto());
+	}
 	
 }

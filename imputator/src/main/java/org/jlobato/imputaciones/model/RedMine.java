@@ -2,7 +2,6 @@ package org.jlobato.imputaciones.model;
 
 import java.io.Serializable;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface RedMineTarget.
  */

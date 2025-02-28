@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * The Interface Persona.
  */
-public interface Persona extends Serializable {
+public interface Persona extends Serializable, Comparable<Persona> {
 	
 	/**
 	 * Gets the id.

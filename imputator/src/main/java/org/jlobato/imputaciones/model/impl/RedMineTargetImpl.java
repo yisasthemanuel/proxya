@@ -8,7 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-// TODO: Auto-generated Javadoc
+/**
+ * Gets the id.
+ *
+ * @return the id
+ */
+
 /**
  * Gets the id.
  *
@@ -21,6 +26,12 @@ import lombok.ToString;
  * @return the id
  */
 @Getter
+
+/**
+ * Sets the id.
+ *
+ * @param id the new id
+ */
 
 /**
  * Sets the id.
@@ -46,6 +57,12 @@ import lombok.ToString;
  *
  * @return the java.lang. string
  */
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 @ToString
 
 /**
@@ -59,7 +76,19 @@ import lombok.ToString;
  *
  * @return the int
  */
+
+/**
+ * Hash code.
+ *
+ * @return the int
+ */
 @EqualsAndHashCode
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.

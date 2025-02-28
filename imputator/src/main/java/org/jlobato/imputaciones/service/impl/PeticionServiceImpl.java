@@ -116,7 +116,7 @@ public class PeticionServiceImpl implements PeticionService {
 	@Override
 	public List<Peticion> creaPeticionesMensuales(int anno, int mesInicio, int mesFin, RedMine redmine, Proyecto proyecto, Persona autor) {
 		/* Obtenemos la lista de meses */
-		List<Peticion> result = new ArrayList<Peticion>();
+		List<Peticion> result = new ArrayList<>();
 	
 
         for (int mes = mesInicio; mes <= mesFin; mes++) {
@@ -143,7 +143,9 @@ public class PeticionServiceImpl implements PeticionService {
             		asunto,
             		descripcion,
             		Date.from(primerDia.atStartOfDay(ZoneId.systemDefault()).toInstant()),
-            		Date.from(ultimoDia.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            		Date.from(ultimoDia.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+            		null,
+            		null);
             
             result.add(peticion);
             log.info("Petición mensual añadida: {}", peticion);
@@ -151,6 +153,80 @@ public class PeticionServiceImpl implements PeticionService {
 		
 		
 		return result;
+	}
+
+	/**
+	 * Gets the peticion.
+	 *
+	 * @param redMine the red mine
+	 * @param persona the persona
+	 * @param idPeticion the id peticion
+	 * @return the peticion
+	 */
+	@Override
+	public Peticion getPeticion(RedMine redMine, Persona persona, Integer idPeticion) {
+		return redmineDriver.getPeticion(redMine, persona, idPeticion);
+	}
+
+	/**
+	 * Crea peticion.
+	 *
+	 * @param redmine the redmine
+	 * @param proyecto the proyecto
+	 * @param autor the autor
+	 * @param asunto the asunto
+	 * @param descripcion the descripcion
+	 * @param fechaInicio the fecha inicio
+	 * @param fechaFin the fecha fin
+	 * @return the peticion
+	 */
+	@Override
+	public Peticion creaPeticion(RedMine redmine, Proyecto proyecto, Persona autor, String asunto, String descripcion, Date fechaInicio, Date fechaFin) {
+		return this.creaPeticion(redmine, proyecto, autor, asunto, descripcion, fechaInicio, fechaFin, null, null);
+	}
+
+	/**
+	 * Crea peticion.
+	 *
+	 * @param redmine the redmine
+	 * @param proyecto the proyecto
+	 * @param autor the autor
+	 * @param asunto the asunto
+	 * @param descripcion the descripcion
+	 * @param fechaInicio the fecha inicio
+	 * @param fechaFin the fecha fin
+	 * @param idTipoPeticion the id tipo peticion
+	 * @return the peticion
+	 */
+	@Override
+	public Peticion creaPeticion(RedMine redmine, Proyecto proyecto, Persona autor, String asunto, String descripcion,
+			Date fechaInicio, Date fechaFin, Integer idTipoPeticion) {
+		return redmineDriver.creaPeticion(redmine.getUri(), proyecto.getIdentificador(), autor.getApiKey(), asunto, descripcion, fechaInicio, fechaFin, idTipoPeticion, null);
+	}
+	
+	/**
+	 * Crea peticion.
+	 *
+	 * @param redmine the redmine
+	 * @param proyecto the proyecto
+	 * @param autor the autor
+	 * @param asunto the asunto
+	 * @param descripcion the descripcion
+	 * @param fechaInicio the fecha inicio
+	 * @param fechaFin the fecha fin
+	 * @param idTipoPeticion the id tipo peticion
+	 * @param idCategoria the id categoria
+	 * @return the peticion
+	 */
+	@Override
+	public Peticion creaPeticion(RedMine redmine, Proyecto proyecto, Persona autor, String asunto, String descripcion,
+			Date fechaInicio, Date fechaFin, Integer idTipoPeticion, Integer idCategoria) {
+		return redmineDriver.creaPeticion(redmine.getUri(), proyecto.getIdentificador(), autor.getApiKey(), asunto, descripcion, fechaInicio, fechaFin, idTipoPeticion, idCategoria);
+	}
+
+	@Override
+	public Peticion copiaPeticion(RedMine redmine, Proyecto proyecto, Persona autor, Peticion peticion) {
+		return redmineDriver.copiaPeticion(redmine.getUri(), proyecto.getIdentificador(), autor.getApiKey(), peticion);
 	}
 
 }

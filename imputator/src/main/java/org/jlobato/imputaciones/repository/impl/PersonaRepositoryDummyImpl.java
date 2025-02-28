@@ -5,10 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jlobato.imputaciones.model.Persona;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
@@ -62,7 +63,9 @@ public class PersonaRepositoryDummyImpl implements PersonaRepository {
 	 */
 	@Override
 	public List<Persona> getAllPersonas() {
-		return new ArrayList<>(personas.values());
+		List<Persona> result = personas.values().stream().collect((Collectors.toList()));
+		Collections.sort(result);
+		return result;
 	}
 
 	/**

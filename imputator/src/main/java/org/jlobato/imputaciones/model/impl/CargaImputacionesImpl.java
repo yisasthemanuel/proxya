@@ -30,6 +30,12 @@ import lombok.ToString;
  *
  * @return the destino
  */
+
+/**
+ * Gets the destino.
+ *
+ * @return the destino
+ */
 @Getter
 
 /**
@@ -49,7 +55,19 @@ import lombok.ToString;
  *
  * @param destino the new destino
  */
+
+/**
+ * Sets the destino.
+ *
+ * @param destino the new destino
+ */
 @Setter
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.
@@ -87,7 +105,19 @@ import lombok.ToString;
  *
  * @return the int
  */
+
+/**
+ * Hash code.
+ *
+ * @return the int
+ */
 @EqualsAndHashCode
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.

@@ -2,6 +2,7 @@ package org.jlobato.imputaciones.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.jlobato.imputaciones.config.RedMineConfiguracion;
 import org.jlobato.imputaciones.model.CargaImputaciones;
@@ -51,6 +52,9 @@ public class ImputacionesController {
 	/** The target red mine service. */
 	@Autowired
 	RedMineService targetRedMineService;
+	
+	@Autowired
+	Map<String, Object> redMineProperties;
 	
 	/**
 	 * Main.
@@ -133,7 +137,7 @@ public class ImputacionesController {
 	 * @param model the model
 	 */ 
 	private void updateModelIndex(Model model) {
-		model.addAttribute("imputacionesProperties", config.getRedMineProperties());
+		model.addAttribute("imputacionesProperties", redMineProperties);
 	    model.addAttribute("redmines", targetRedMineService.getRedMinesAvailables());
 	    model.addAttribute("seleccioneOpcionText", "Por favor, seleccione una opción..."); //i18n
 	}

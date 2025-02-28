@@ -3,6 +3,7 @@ package org.jlobato.imputaciones.service.impl;
 import org.jlobato.imputaciones.model.Proyecto;
 import org.jlobato.imputaciones.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,12 @@ public class ProyectoServiceImpl implements ProyectoService {
 	
 	/** The proyecto educamos. */
 	@Autowired
+	@Qualifier("getProyectoEducamos")
 	Proyecto proyectoEducamos;
+	
+	@Autowired
+	@Qualifier("getProyectoEducamosGesproy")
+	Proyecto proyectoEducamosGesproy;
 
 	/**
 	 * Crea proyecto.
@@ -41,8 +47,12 @@ public class ProyectoServiceImpl implements ProyectoService {
 	 */
 	@Override
 	public Proyecto getProyectoByIdentificador(String identificador) {
+		if ("2404_v-edu-a-educamosclm-s-mantenimiento".equals(identificador)) {
+			log.debug("Devolvemos el proyecto: {}", proyectoEducamosGesproy);
+			return proyectoEducamosGesproy;
+		}
 		//Por ahora siempre devolvemos el mismo: educamos
-		log.info("Por ahora siempre devolvemos el mismo, educamos: {}", proyectoEducamos);
+		log.debug("Por ahora siempre devolvemos el mismo, educamos: {}", proyectoEducamos);
 		return proyectoEducamos;
 	}
 

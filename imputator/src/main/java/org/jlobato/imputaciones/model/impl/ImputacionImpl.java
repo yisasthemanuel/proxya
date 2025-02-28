@@ -8,7 +8,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-// TODO: Auto-generated Javadoc
+/**
+ * Gets the PR bolsa.
+ *
+ * @return the PR bolsa
+ */
+
 /**
  * Gets the PR bolsa.
  *
@@ -45,7 +50,19 @@ import lombok.ToString;
  *
  * @param pRBolsa the new PR bolsa
  */
+
+/**
+ * Sets the PR bolsa.
+ *
+ * @param pRBolsa the new PR bolsa
+ */
 @Setter
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.
@@ -83,7 +100,19 @@ import lombok.ToString;
  *
  * @return the int
  */
+
+/**
+ * Hash code.
+ *
+ * @return the int
+ */
 @EqualsAndHashCode
+
+/**
+ * To string.
+ *
+ * @return the java.lang. string
+ */
 
 /**
  * To string.

@@ -35,9 +35,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Configuration
 @EnableConfigurationProperties(RedMineProperties.class)
-
-/** The Constant log. */
-
 /** The Constant log. */
 @Slf4j
 public class RedMineConfiguracion {
@@ -50,7 +47,7 @@ public class RedMineConfiguracion {
 	 */
 	@ConfigurationProperties(prefix="redmine")
 	@Bean
-	public Map<String, Object> getRedMineProperties() {
+	Map<String, Object> getRedMineProperties() {
 	    return new HashMap<>();
 	}
 	
@@ -99,7 +96,7 @@ public class RedMineConfiguracion {
 	}
 	
 	@Bean
-	public Locale getLocaleDefecto() {
+	Locale getLocaleDefecto() {
 		return new Locale("es", "ES");
 	}
 	
@@ -109,7 +106,7 @@ public class RedMineConfiguracion {
 	 * @return the formateador fecha
 	 */
 	@Bean("formateadorFecha")
-	public SimpleDateFormat getFormateadorFecha() {
+	SimpleDateFormat getFormateadorFecha() {
 		return new SimpleDateFormat("MMMMM 'de' yyyy", getLocaleDefecto());
 	}
 	
@@ -119,18 +116,17 @@ public class RedMineConfiguracion {
 	 * @return the formateador fecha restauracion
 	 */
 	@Bean("formateadorFechaRestauracion")
-	public SimpleDateFormat getFormateadorFechaRestauracion() {
+	SimpleDateFormat getFormateadorFechaRestauracion() {
 		return new SimpleDateFormat("dd/MM/yyyy 'a las' HH:mm", getLocaleDefecto());
 	}
 	
 	@Bean("formateadorFechaImputaciones")
-	public SimpleDateFormat getDateFormatter() {
+	SimpleDateFormat getDateFormatter() {
 		return new SimpleDateFormat("dd/MM/yyyy");
 	}
 	
-	
 	@Bean("formateadorTextos")
-	public MessageFormat getFormateadorTextos() {
+	MessageFormat getFormateadorTextos() {
 		return new MessageFormat("", getLocaleDefecto());
 	}
 	
@@ -141,7 +137,7 @@ public class RedMineConfiguracion {
 	 * @return the imputaciones fields
 	 */
 	@Bean
-	public Map<String, String> getImputacionesFields() {
+	Map<String, String> getImputacionesFields() {
 		HashMap<String, String> result = new HashMap<>();
 		
 		result.put("Horas dedicadas JA", "JAPermanente");
@@ -156,5 +152,16 @@ public class RedMineConfiguracion {
 		
 		return result;
 	}
+	
+	/**
+	 * Gets the date params formatter.
+	 *
+	 * @return the date params formatter
+	 */
+	@Bean("formateadorParamsImputaciones")
+	SimpleDateFormat getDateParamsFormatter() {
+		return new SimpleDateFormat("yyyy-MM-dd");
+	}
+	
 	
 }

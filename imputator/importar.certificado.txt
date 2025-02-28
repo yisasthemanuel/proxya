@@ -13,7 +13,7 @@ keytool -importcert -alias <alias> -file <fichero .cer> -keystore cacerts -store
 ejemplo: keytool -importcert -alias seta_2022_11 -file seta.2022.10.cer -keystore cacerts -storepass changeit -noprompt
 
 # Comprobar que está el certificado
-keytool -list -v -alias <alias> -storepass changeit
-ejemplo: keytool -list -v -alias seta_2022_11 -storepass changeit
+keytool -list -v -alias <alias> -storepass changeit -keystore cacerts
+ejemplo: keytool -list -v -alias seta_2022_11 -storepass changeit -keystore cacerts
 
 Si no se hace directamente sobre el cacerts de src/main/resources, copiarlo a dicho directorio

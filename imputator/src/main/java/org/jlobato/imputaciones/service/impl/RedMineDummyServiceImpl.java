@@ -56,6 +56,15 @@ public class RedMineDummyServiceImpl implements RedMineService {
 				.description("RedMine de Proxya")
 				.build()
 		);
+		
+		REDMINES.put(5, RedMineTargetImpl.builder()
+				.id(5)
+				.uri("https://redmine.ayuncordoba.org/")
+				.apiKey("fceb749f2a53a294d7e2e4ec1e9e8c313a267ac6") //jmplobato
+				.projectName("Ayto Córdoba")
+				.description("RedMine del Ayuntamiento de Córdoba")
+				.build()
+		);
 	}
 	
 	/**

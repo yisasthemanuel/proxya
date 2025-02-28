@@ -1,13 +1,14 @@
 package org.jlobato.imputaciones;
 
 import java.util.Iterator;
+import java.util.Map;
 
-import org.jlobato.imputaciones.config.RedMineConfiguracion;
 import org.jlobato.imputaciones.model.Persona;
 import org.jlobato.imputaciones.model.Proyecto;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
 import org.jlobato.imputaciones.model.impl.ProyectoImpl;
 import org.jlobato.imputaciones.repository.PersonaRepository;
+import org.jlobato.imputaciones.service.EstimacionService;
 import org.jlobato.imputaciones.service.ImputacionService;
 import org.jlobato.imputaciones.service.PeticionService;
 import org.jlobato.imputaciones.service.ProyectoService;
@@ -36,6 +37,21 @@ public class ImputacionesApplication {
 	}
 	
 	/**
+	 * Test get imputaciones.
+	 *
+	 * @param imputacionService the imputacion service
+	 * @param targetRedMineService the redmine service
+	 * @param projectService the project service
+	 * @param repository the repository
+	 * @return the command line runner
+	 */
+	@Bean
+	CommandLineRunner testGetImputaciones(ImputacionService imputacionService, RedMineService targetRedMineService, ProyectoService projectService, PersonaRepository repository, PeticionService peticionService, EstimacionService estimacionService) {
+		return args -> {
+		};
+	}
+	
+	/**
 	 * Inicialización del servicio SETA.
 	 *
 	 * @param imputacionService Servicio SETA que se va a iniciar
@@ -43,11 +59,8 @@ public class ImputacionesApplication {
 	 * @return the command line runner
 	 */
 	@Bean
-	CommandLineRunner initSetaService(ImputacionService imputacionService, RedMineConfiguracion config) {
-		return args -> {
-			imputacionService.init();
-			log.info("Configuración: {}",  config.getRedMineProperties());
-		};
+	CommandLineRunner initSetaService(ImputacionService imputacionService, Map<String, Object> redMineProperties) {
+		return args -> imputacionService.init();
 	}
 	
 	/**
@@ -61,7 +74,8 @@ public class ImputacionesApplication {
 	@Bean
 	CommandLineRunner addPeticionesMensuales(PeticionService peticionService, RedMineService redmineService, ProyectoService proyectoService) {
 		return args -> {
-//			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2024, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
+//			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2024, 9, 12, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
+//			peticiones.addAll(peticionService.creaPeticionesMensuales(2025, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm")));
 //			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
 //			log.info("Peticiones creadas: {}", peticiones);
 //			while (iteraPeticiones.hasNext()) {
@@ -79,6 +93,61 @@ public class ImputacionesApplication {
 	@Bean
 	CommandLineRunner addPersona(PersonaRepository repository) {
 		return args -> {
+			
+//			Persona persona = PersonaImpl.builder()
+//			.id("200200")
+//			.apiKey("2df0ba4715e4f32041dd7cd3358e4a7cf6209b71")
+//			.nickname("fujitsu_jabenitez@ayuncordoba.org")
+//			.nombre("Jose Antonio")
+//			.primerApellido("Benítez")
+//			.segundoApellido("Montero")
+//			.nombreCompleto("Jose Antonio Benítez Montero")
+//			.build();
+//			repository.addPersona(persona);
+//			
+//			persona = PersonaImpl.builder()
+//					.id("200201")
+//					.apiKey("12bbc5bc43211e2566a83868fc3ecca4900975c1")
+//					.nickname("proxya_ifernandez@ayuncordoba.org")
+//					.nombre("Ismael")
+//					.primerApellido("Fernández")
+//					.segundoApellido("Zambrano")
+//					.nombreCompleto("Ismael Fernández Zambrano")
+//					.build();
+//			repository.addPersona(persona);
+//			
+//			persona = PersonaImpl.builder()
+//					.id("200202")
+//					.apiKey("fceb749f2a53a294d7e2e4ec1e9e8c313a267ac6")
+//					.nickname("proxya_jmperez@ayuncordoba.org")
+//					.nombre("Jesús Manuel")
+//					.primerApellido("Pérez")
+//					.segundoApellido("Lobato")
+//					.nombreCompleto("Jesús Manuel Pérez Lobato")
+//					.build();
+//			repository.addPersona(persona);
+//
+//			persona = PersonaImpl.builder()
+//					.id("10052")
+//					.apiKey("59872ca43e34b151002ca0d84d1c783455319afd")
+//					.nickname("hhem01")
+//					.nombre("Habiba")
+//					.primerApellido("El Mamouni")
+//					.segundoApellido("Maarouf")
+//					.nombreCompleto("Habiba El Mamouni Maarouf")
+//					.build();
+//			repository.addPersona(persona);
+//
+//			persona = PersonaImpl.builder()
+//					.id("10053")
+//					.apiKey("1fb38953988be4df6f816a10a1d9e77dbe48b610")
+//					.nickname("ffdd20")
+//					.nombre("Fernando")
+//					.primerApellido("Díaz del Río")
+//					.segundoApellido("Casal")
+//					.nombreCompleto("Fernando Días del Río Casal")
+//					.build();
+//			repository.addPersona(persona);
 			
 			Iterator<Persona> personas = repository.getAllPersonas().iterator();
 			
@@ -145,5 +214,23 @@ public class ImputacionesApplication {
 		log.debug("Proyecto por defecto: {}", proyecto);
 		return proyecto;
 		
-	}	
+	}
+	
+	/**
+	 * Gets the proyecto educamos gesproy.
+	 *
+	 * @return the proyecto educamos gesproy
+	 */
+	@Bean
+	Proyecto getProyectoEducamosGesproy() {
+		return ProyectoImpl.builder()
+				.descripcion("Servicio de evolución de la plataforma educamosCLM (https://educamosclm.castillalamancha.es/)\n"
+						+ "\n"
+						+ "Comprende la dirección y seguimiento del proyecto. En concreto, el backlog de la plataforma y los sprint definidos para su implementación. Los trabajos asociados a cambios correctivos, evolutivos, perfectivos y adaptativo se gestionarán en sus respectivos proyectos. \n"
+						+ "\n"
+						+ "En la Wiki del proyecto se descrita la aproximación de gestión basado en metodología ágil que se adoptará para la plataforma.")
+				.identificador("2404_v-edu-a-educamosclm-s-mantenimiento")
+				.nombre("V-EDU-A EDUCAMOSCLM-S MANTENIMIENTO")
+				.build();
+	}
 }

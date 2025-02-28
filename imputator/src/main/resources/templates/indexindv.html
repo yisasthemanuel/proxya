@@ -22,18 +22,26 @@
 	  </div>
 
   <form class="formulario" method="post" enctype="multipart/form-data" action="#" th:action="@{/gesproy}">
-  	<input type="hidden" name="targetRedMine" id="targetRedMine" value="3"/>
   	<div>
 		<h5>Realizar imputaciones a Gesproy</h5>
 	  	<div>
-			<label for="fichImputaciones">1. Elige el excel en el que están las imputaciones a realizar. <a href="/excels/example.imputaciones.individuales.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
+			<label for="targetRedMine">1. Elige el RedMine de destino de las imputaciones (normalmente se eligirá Gesproy):</label>
+  			<select name="targetRedMine" id="targetRedMine">
+  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
+  				<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
+    			</option>
+			</select>
+		</div>
+		<br>
+	  	<div>
+			<label for="fichImputaciones">2. Elige el excel en el que están las imputaciones a realizar. <a href="/excels/example.imputaciones.individuales.xlsx" target="_blank">Aquí</a> puedes descargar un excel con la estructura esperada</label>
 			<div>
 				<input id="fichImputaciones" name="fichImputaciones" type="file" placeholder="Imputaciones">
 			</div>
 		</div>
 		<br>
 		<div>
-			<label for="singlebutton">2. Al pulsar en 'Imputar' se realizarán las imputaciones del excel seleccionado en Gesproy</label>
+			<label for="singlebutton">3. Al pulsar en 'Imputar' se realizarán las imputaciones del excel seleccionado en Gesproy</label>
 			<div>
 				<button id="singlebutton" name="singlebutton" th:formaction="@{/gesproy/cargaImputaciones}">Imputar</button>
 			</div>

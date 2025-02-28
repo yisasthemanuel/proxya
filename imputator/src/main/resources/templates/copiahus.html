@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Imputaciones view">
+    <meta name="author" content="Yisas">
+
+    <title>Imputaciones Gesproy - Copias HUs</title>
+
+  </head>
+  <body>
+  <div>
+	  <h3>Explicación general</h3>
+	  <h4>
+		  Desde aquí podrás hacer lo siguiente:
+		  <ol>
+			  <li>Paso 1</li>
+			  <li>Paso 2</li>
+		  </ol>			  
+	  </h4>
+  </div>
+	  
+	<form class="formulario" method="post" action="#" th:action="@{/gesproy}">
+	  
+	<div>
+		<label for="fechaInicio">1. Introduce la fecha (incluída) desde la cual quieres copiar las imputaciones. El formato debe ser DD/MM/AAAA</label>
+		<div>
+			<input id="fechaInicio" name="fechaInicio" type="text" placeholder="Desde (DD/MM/AAAA)">
+		</div>
+	</div>
+	<br>
+
+	<div>
+		<label for="fechaFin">2. Introduce la fecha (incluída) hasta la cual quieres copiar las imputaciones. El formato debe ser DD/MM/AAAA</label>
+		<div>
+			<input id="fechaFin" name="fechaFin" type="text" placeholder="Hasta (DD/MM/AAAA)">
+		</div>
+	</div>
+	<br>
+	
+	<div>
+	  	<div>
+			<label for="targetRedMine">3. Elige el RedMine de origen de las imputaciones y en donde se copiarán (normalmente se eligirá Gesproy):</label>
+  			<select name="targetRedMine" id="targetRedMine">
+  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
+  				<option th:each="i : ${redmines}" th:value="${i.id}" th:text="${i.description}" th:selected="${i.id == selectedRedMine}">
+    			</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	
+	<div>
+	  	<div>
+			<label for="selectedProject">4. Elige el Proyecto de orgien y destino de las imputaciones (normalmente se eligirá educamosCLM):</label>
+  			<select name="selectedProject" id="selectedProject">
+  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
+  				<option th:each="i : ${proyectos}" th:value="${i.identificador}" th:text="${i.nombre}" th:selected="${i.identificador == selectedProject}">
+    			</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	
+	<div>
+	  	<div>
+			<label for="personas">5. Elige la persona o personas de las que quieres copiar las imputaciones:</label>
+			<br>
+  			<select name="personas" id="personas" multiple size="10">
+  				<option th:value="-1" th:text="${seleccioneOpcionText}"></option> 
+  				<option th:each="i : ${personas}" th:value="${i.nickname}" th:text="${i.nickname} + ' - ' + ${i.nombreCompleto}" th:selected="${i.nickname == selectedProject}">
+    			</option>
+			</select>
+		</div>
+	</div>
+	<br>
+	
+	<div>
+		<label for="relbutton">6. Al pulsar en 'Copia imputaciones' se trasladarán las imputaciones a una copia (con asunto modificado) de las peticiones en donde imputaron</label>
+		<div>
+			<button id="relbutton" name="relbutton" th:formaction="@{/gesproy/copiaImputaciones}">Copia imputaciones</button>
+		</div>
+	</div>
+  	</form>
+	<br>
+	<br>
+  	 
+	<div>
+  		<a id="principalButton" th:href="@{/}">Volver a la página principal</button>
+  	</div>
+  </body>
+</html>
