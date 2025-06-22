@@ -1,9 +1,11 @@
 package org.jlobato.imputaciones;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.jlobato.imputaciones.model.Persona;
+import org.jlobato.imputaciones.model.Peticion;
 import org.jlobato.imputaciones.model.Proyecto;
 import org.jlobato.imputaciones.model.impl.PersonaImpl;
 import org.jlobato.imputaciones.model.impl.ProyectoImpl;
@@ -74,13 +76,13 @@ public class ImputacionesApplication {
 	@Bean
 	CommandLineRunner addPeticionesMensuales(PeticionService peticionService, RedMineService redmineService, ProyectoService proyectoService) {
 		return args -> {
-//			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2024, 9, 12, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
-//			peticiones.addAll(peticionService.creaPeticionesMensuales(2025, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm")));
-//			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
-//			log.info("Peticiones creadas: {}", peticiones);
-//			while (iteraPeticiones.hasNext()) {
-//				log.info("Petición: {}", iteraPeticiones.next());
-//			}
+			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2025, 9, 12, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
+			peticiones.addAll(peticionService.creaPeticionesMensuales(2026, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm")));
+			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
+			log.info("Peticiones creadas: {}", peticiones);
+			while (iteraPeticiones.hasNext()) {
+				log.info("Petición: {}", iteraPeticiones.next());
+			}
 		};
 	}
 	
@@ -94,17 +96,17 @@ public class ImputacionesApplication {
 	CommandLineRunner addPersona(PersonaRepository repository) {
 		return args -> {
 			
-//			Persona persona = PersonaImpl.builder()
-//			.id("200200")
-//			.apiKey("2df0ba4715e4f32041dd7cd3358e4a7cf6209b71")
-//			.nickname("fujitsu_jabenitez@ayuncordoba.org")
-//			.nombre("Jose Antonio")
-//			.primerApellido("Benítez")
-//			.segundoApellido("Montero")
-//			.nombreCompleto("Jose Antonio Benítez Montero")
-//			.build();
-//			repository.addPersona(persona);
-//			
+			Persona persona = PersonaImpl.builder()
+			.id("200400")
+			.apiKey("095189e01bfcbcec7f0af44a67d1b9819dafdd02")
+			.nickname("ampf10")
+			.nombre("Álvaro Miguel")
+			.primerApellido("Pérez")
+			.segundoApellido("Fuentes-Guerra")
+			.nombreCompleto("Álvaro Miguel Pérez Fuentes-Guerra")
+			.build();
+			repository.addPersona(persona);
+			
 //			persona = PersonaImpl.builder()
 //					.id("200201")
 //					.apiKey("12bbc5bc43211e2566a83868fc3ecca4900975c1")
