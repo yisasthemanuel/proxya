@@ -76,13 +76,13 @@ public class ImputacionesApplication {
 	@Bean
 	CommandLineRunner addPeticionesMensuales(PeticionService peticionService, RedMineService redmineService, ProyectoService proyectoService) {
 		return args -> {
-			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2025, 9, 12, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
-			peticiones.addAll(peticionService.creaPeticionesMensuales(2026, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm")));
-			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
-			log.info("Peticiones creadas: {}", peticiones);
-			while (iteraPeticiones.hasNext()) {
-				log.info("Petición: {}", iteraPeticiones.next());
-			}
+//			List<Peticion> peticiones = peticionService.creaPeticionesMensuales(2025, 9, 12, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm"));
+//			peticiones.addAll(peticionService.creaPeticionesMensuales(2026, 1, 8, redmineService.getRedMine(4), proyectoService.getProyectoByIdentificador("jccm-educamosclm")));
+//			Iterator<Peticion> iteraPeticiones = peticiones.iterator();
+//			log.info("Peticiones creadas: {}", peticiones);
+//			while (iteraPeticiones.hasNext()) {
+//				log.info("Petición: {}", iteraPeticiones.next());
+//			}
 		};
 	}
 	

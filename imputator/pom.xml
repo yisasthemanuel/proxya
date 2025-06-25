@@ -6,6 +6,7 @@
 	<artifactId>API_SETA</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	<name>API_SETA_02</name>
+	<packaging>jar</packaging>
 	<description>Integraciones con API RedMine: imputaciones y creación de peticiones en lote</description>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
